@@ -12,23 +12,23 @@
       </div>
       <div class="card-content">
         <h2 class="card-title" v-text="item[`${recMode}Name`]"></h2>
-        <p class="card-text" v-if="item.Date">
+        <p class="card-text mb-1" v-if="item.Date">
           <span v-text="' ' + item.Date"></span>
         </p>
-        <p class="card-text" v-if="!item.Date && item.StartTime">
+        <p class="card-text mb-1" v-if="!item.Date && item.StartTime">
           <span v-text="' ' + item.StartTime"></span>
           <span v-text="' ' + item.EndTime"></span>
         </p>
-        <p class="card-text" v-if="item.OpenTime">
+        <p class="card-text mb-1" v-if="item.OpenTime">
           <span v-text="item.OpenTime"></span>
         </p>
-        <p class="card-text" v-if="item.TicketInfo">
+        <p class="card-text mb-1" v-if="item.TicketInfo">
           <span v-text="item.TicketInfo"></span>
         </p>
-        <p class="card-text" v-if="item.Address">
+        <p class="card-text mb-1" v-if="item.Address">
           <span v-text="item.Address"></span>
         </p>
-        <p class="card-text" v-if="item.Class || item.Class1 || item.Class2 || item.Class3">
+        <p class="card-text mb-1" v-if="item.Class || item.Class1 || item.Class2 || item.Class3">
           <span class="card-tag" v-text="item.Class" v-if="item.Class"></span>
           <span class="card-tag" v-text="item.Class1" v-if="item.Class1"></span>
           <span class="card-tag" v-text="item.Class2" v-if="item.Class2"></span>
@@ -58,6 +58,7 @@ export default {
     page: Number
   },
   setup(props) {
+    // 產生對應卡片資料
     const loading = ref(0);
     const result = ref(null);
     const loadData = () => {

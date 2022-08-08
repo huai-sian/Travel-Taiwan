@@ -40,29 +40,29 @@
         </div>
         <div class="card-content">
           <h2 class="card-title" v-text="item[mode + 'Name']"></h2>
-            <p class="card-text" v-if="item.Date">
+            <p class="card-text mb-1" v-if="item.Date">
               <i class="fas fa-calendar"></i>
               <span v-text="' ' + item.Date"></span>
             </p>
-            <p class="card-text" v-if="!item.Date && item.StartTime">
+            <p class="card-text mb-1" v-if="!item.Date && item.StartTime">
               <i class="fas fa-calendar"></i>
               <span v-text="' ' + item.StartTime + ' ~ '"></span>
               <span v-text="item.EndTime"></span>
             </p>
-            <p class="card-text" v-if="item.OpenTime">
+            <p class="card-text mb-1" v-if="item.OpenTime">
               <i class="fas fa-clock"></i>
               <span v-text="' ' + item.OpenTime.split('；')[0]"></span>
             </p>
-            <p class="card-text" v-if="item.TicketInfo">
+            <p class="card-text mb-1" v-if="item.TicketInfo">
               <i class="far fa-ticket"></i>
               <span v-text="' ' + item.TicketInfo"></span>
             </p>
-            <p class="card-text" v-if="item.Address">
+            <p class="card-text mb-1" v-if="item.Address">
               <i class="fas fa-location-arrow"></i>
               <span v-if="item.Location" v-text="' ' + item.location"></span>
               <span v-text="' ' + item.Address"></span>
             </p>
-            <p class="card-text" v-if="item.Class || item.Class1 || item.Class2 || item.Class3">
+            <p class="card-text mb-1" v-if="item.Class || item.Class1 || item.Class2 || item.Class3">
               <i class="fas fa-tag"></i>
               <span
                 class="card-tag bdrs-sm"
@@ -181,8 +181,13 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import "../assets/scss/components/_variables.scss";
+
   .search {
     padding: 2rem;
+    @media screen and (max-width: 767px) {
+      padding: .8rem;
+    }
   }
   .banner {
     position: relative;
@@ -207,6 +212,10 @@ export default {
       letter-spacing: 2px;
       color: white;
       text-shadow: 0 0 1rem #00000099;
+      @media screen and (max-width: 767px) {
+        top: 80%;
+        font-size: 2rem;
+      }
     }
   }
   .mode {
@@ -215,15 +224,15 @@ export default {
       display: inline-block;
       margin: 0 .5rem;
       padding: 0.3rem 0.8rem;
-      color: #ff9999;
-      border: 1px solid #ff9999;
+      color: $c_main;
+      border: 1px solid $c_main;
       text-decoration: none;
       cursor: pointer;
       border-radius: 0.5rem;
       overflow: hidden;
       &.active {
         color: white;
-        background-color: #ff9999;
+        background-color: $c_main;
       }
     }
   }

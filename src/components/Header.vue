@@ -211,7 +211,7 @@ export default {
   props: {
     closeHeader: Function,
   },
-  setup() {
+  setup(props) {
     const mode = ref("ScenicSpot");
     const openCity = ref(false);
     const city = ref("Taiwan");
@@ -227,6 +227,7 @@ export default {
     const cityName = (city) => { return cityLib[city].name };
     console.log(mode.value, city.value, keyword.value);
     const goSearch = (searchMode = mode.value, key = keyword.value.split(' ').join()) => {
+      props.closeHeader();
       router.replace({
         name: "Search",
         params: { mode: searchMode, city: city.value, keyword: key }

@@ -23,6 +23,10 @@ body {
   justify-content: space-around;
 }
 
+.mb-1 {
+  margin-bottom: .2rem;
+}
+
 .card {
   display: flex;
   align-items: stretch;
@@ -36,6 +40,9 @@ body {
   color: black;
   &-content {
     padding: 1rem;
+    @media screen and (max-width: 767px) {
+      padding: .3rem;
+    }
   }
   &:hover {
     box-shadow: 0px 0px 1.5rem #00000019;
@@ -121,6 +128,9 @@ body {
         color: white;
         background: linear-gradient(to bottom, transparent 30%, #000000cc 100%);
         padding: 1rem;
+        @media screen and (max-width: 767px) {
+          padding: .3rem;
+        }
       }
     }
   }
@@ -155,6 +165,9 @@ body {
         border-radius: .5rem;
         height: calc(200px - min(1.6rem, 3vw));
         margin: 1rem;
+        @media screen and (max-width: 767px) {
+          margin: .3rem;
+        }
       }
     }
   }
@@ -315,7 +328,6 @@ body {
   overflow: hidden;
   &.show {
     top: 168px;
-
   }
   &-item {
     display: block;
