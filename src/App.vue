@@ -13,19 +13,19 @@
           <i class="fas fa-bars"></i>
         </button>
       </div>
-      <router-view 
+      <router-view
         :mode="mode"
         :setMode="setMode"
         :key="$route.fullPath">
       </router-view>
     </div>
   </div>
- 
+  
 </template>
 
 <script>
 import Header from "./components/Header.vue";
-import { ref } from 'vue'
+import { ref, provide } from 'vue'
 import { watch } from "@vue/runtime-core";
 
 export default {
@@ -37,6 +37,7 @@ export default {
     const headerShow = ref(true);
     const closeHeader = () => { headerShow.value = false; };
     const mode = ref('ScenicSpot');
+    // provide('headerShow', headerShow.value);
     const setMode = (m) => {
       mode.value = m;
     }

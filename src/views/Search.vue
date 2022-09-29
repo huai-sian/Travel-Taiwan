@@ -161,7 +161,7 @@ export default {
     }
     const getTitle = () => {
       if(keyword) {
-        return keyword.split(',').join();
+        return keyword.split(',').join(' ');
       } else if(city) {
         return city.replace(/[A-Z]/g, " $&");
       } else {

@@ -202,7 +202,7 @@
 </template>
 
 <script>
-import { computed, ref } from "vue"
+import { computed, ref, inject } from "vue"
 import { cityLib, modeLib } from '../composables/data.js'
 import { useRoute, useRouter } from 'vue-router'
 
@@ -217,6 +217,8 @@ export default {
     const city = ref("Taiwan");
     const keyword = ref("");
     const router = useRouter();
+    // const headerShow = inject("headerShow");
+    // console.log(headerShow);
     const setCity = (c) => { city.value = c };
     const searchMode = computed(() => {
       return modeLib[mode.value]
