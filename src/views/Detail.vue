@@ -189,7 +189,14 @@
     />
   </div>
   <div v-if="loading <= 0">
-    Loading
+    <div class="loading-title"></div>
+    <div class="loading-banner"></div>
+    <div class="loading-title"></div>
+    <div class="loading-text"></div>
+    <div class="loading-text"></div>
+    <div class="loading-title"></div>
+    <div class="loading-text"></div>
+    <div class="loading-text"></div>
   </div>
 </template>
 
@@ -234,7 +241,23 @@ export default {
 
 <style lang="scss" scoped>
 @import "./../assets/scss/components/_variables.scss";
-
+  @mixin background {
+    background: linear-gradient(
+      110deg,
+      transparent 40%,
+      rgba(255, 255, 255, 0.5) 50%,
+      transparent 60%
+    ),
+    $c_main;
+    background-size: 200% 100%;
+    background-position: 120%;
+    animation: 1.5s loading ease-in-out infinite;
+  }
+  @keyframes loading {
+    to {
+      background-position: -20%;
+    }
+  }
   .detail {
     padding: 2rem;
     p {
@@ -290,6 +313,23 @@ export default {
       height: 100%;
       object-fit: cover;
       object-position: center center;
+    }
+  }
+  .loading {
+    &-title {
+      width: 40%;
+      max-width: 40%;
+      height: 3rem;
+      margin: 1rem 0;
+      animation-delay: 0.08s;
+    }
+    &-text {
+      min-height: 1.5rem;
+      margin-bottom: 0.5rem;
+      animation-delay: 0.1s;
+    }
+    &-banner {
+      padding-top: 300px;
     }
   }
 </style>

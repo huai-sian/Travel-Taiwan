@@ -95,6 +95,9 @@
         載入更多
       </button>
     </template>
+    <template v-if="loading == 0">
+      <Loading :amount="parseInt(6)" :loadMode="mode" />
+    </template>
     <template v-if="loading == -1">
       <Error />
     </template>
@@ -108,7 +111,8 @@ import { useRoute, useRouter } from 'vue-router'
 import { dataFilter, getData, handleTime, getNearInfo } from '../composables/modules.js'
 import { sloganLib, cityLib, modeLib } from '../composables/data.js'
 import Recommend from '../components/Recommend.vue'
-import Error from './../components/Error'
+import Error from './../components/Error.vue'
+import Loading from './../components/Loading.vue'
 
 export default {
   name: 'Search',
@@ -118,6 +122,7 @@ export default {
   },
   components: {
     Error,
+    Loading
   },
   setup(props) {
     const route = useRoute();
