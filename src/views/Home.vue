@@ -11,7 +11,7 @@
       <router-link 
         v-for="(item, idx) in ranCities"
         :key="item[0]"
-        :to="`/`"
+        :to="`/ScenicSpot/${item[0]}`"
         class="hot-city"
       >
         <img :alt="item[0]" class="hot-city-img" :src="getImgUrl(idx + 1)">
