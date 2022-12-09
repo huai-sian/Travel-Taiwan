@@ -27,72 +27,77 @@
         replace
       >活動</router-link>
     </div>
-    <div :class="`card-${mode}`">
-      <router-link class="card"
-        v-for="item in result"
-        :key="item[`${mode}ID`]"
-        :to="`/detail/${item[mode + 'ID']}`">
-        <div class="card-box">
-          <img
-            :src="item.Picture.PictureUrl1"
-            :alt="item.Picture.PictureDescription1"
-            class="card-img">
-        </div>
-        <div class="card-content">
-          <h2 class="card-title" v-text="item[mode + 'Name']"></h2>
-            <p class="card-text mb-1" v-if="item.Date">
-              <i class="fas fa-calendar"></i>
-              <span v-text="' ' + item.Date"></span>
-            </p>
-            <p class="card-text mb-1" v-if="!item.Date && item.StartTime">
-              <i class="fas fa-calendar"></i>
-              <span v-text="' ' + item.StartTime + ' ~ '"></span>
-              <span v-text="item.EndTime"></span>
-            </p>
-            <p class="card-text mb-1" v-if="item.OpenTime">
-              <i class="fas fa-clock"></i>
-              <span v-text="' ' + item.OpenTime.split('；')[0]"></span>
-            </p>
-            <p class="card-text mb-1" v-if="item.TicketInfo">
-              <i class="far fa-ticket"></i>
-              <span v-text="' ' + item.TicketInfo"></span>
-            </p>
-            <p class="card-text mb-1" v-if="item.Address">
-              <i class="fas fa-location-arrow"></i>
-              <span v-if="item.Location" v-text="' ' + item.location"></span>
-              <span v-text="' ' + item.Address"></span>
-            </p>
-            <p class="card-text mb-1" v-if="item.Class || item.Class1 || item.Class2 || item.Class3">
-              <i class="fas fa-tag"></i>
-              <span
-                class="card-tag bdrs-sm"
-                v-text="item.Class"
-                v-if="item.Class"
-              ></span>
-              <span
-                class="card-tag bdrs-sm"
-                v-text="item.Class1"
-                v-if="item.Class1"
-              ></span>
-              <span
-                class="card-tag bdrs-sm"
-                v-text="item.Class2"
-                v-if="item.Class2"
-              ></span>
-              <span
-                class="card-tag bdrs-sm"
-                v-text="item.Class3"
-                v-if="item.Class3"
-              ></span>
-            </p>
+    <template v-if="loading == 1">
+      <div :class="`card-${mode}`">
+        <router-link class="card"
+          v-for="item in result"
+          :key="item[`${mode}ID`]"
+          :to="`/detail/${item[mode + 'ID']}`">
+          <div class="card-box">
+            <img
+              :src="item.Picture.PictureUrl1"
+              :alt="item.Picture.PictureDescription1"
+              class="card-img">
           </div>
-      </router-link>
-    </div>
-    <button
-      :class="['loadBtn', { hide: loadBtn}]"
-      @click="loadData">
-      載入更多
-    </button>
+          <div class="card-content">
+            <h2 class="card-title" v-text="item[mode + 'Name']"></h2>
+              <p class="card-text mb-1" v-if="item.Date">
+                <i class="fas fa-calendar"></i>
+                <span v-text="' ' + item.Date"></span>
+              </p>
+              <p class="card-text mb-1" v-if="!item.Date && item.StartTime">
+                <i class="fas fa-calendar"></i>
+                <span v-text="' ' + item.StartTime + ' ~ '"></span>
+                <span v-text="item.EndTime"></span>
+              </p>
+              <p class="card-text mb-1" v-if="item.OpenTime">
+                <i class="fas fa-clock"></i>
+                <span v-text="' ' + item.OpenTime.split('；')[0]"></span>
+              </p>
+              <p class="card-text mb-1" v-if="item.TicketInfo">
+                <i class="far fa-ticket"></i>
+                <span v-text="' ' + item.TicketInfo"></span>
+              </p>
+              <p class="card-text mb-1" v-if="item.Address">
+                <i class="fas fa-location-arrow"></i>
+                <span v-if="item.Location" v-text="' ' + item.location"></span>
+                <span v-text="' ' + item.Address"></span>
+              </p>
+              <p class="card-text mb-1" v-if="item.Class || item.Class1 || item.Class2 || item.Class3">
+                <i class="fas fa-tag"></i>
+                <span
+                  class="card-tag bdrs-sm"
+                  v-text="item.Class"
+                  v-if="item.Class"
+                ></span>
+                <span
+                  class="card-tag bdrs-sm"
+                  v-text="item.Class1"
+                  v-if="item.Class1"
+                ></span>
+                <span
+                  class="card-tag bdrs-sm"
+                  v-text="item.Class2"
+                  v-if="item.Class2"
+                ></span>
+                <span
+                  class="card-tag bdrs-sm"
+                  v-text="item.Class3"
+                  v-if="item.Class3"
+                ></span>
+              </p>
+            </div>
+        </router-link>
+      </div>
+      <button
+        :class="['loadBtn', { hide: loadBtn}]"
+        @click="loadData">
+        載入更多
+      </button>
+    </template>
+    <template v-if="loading == -1">
+      <Error />
+    </template>
   </div>
 </template>
 
@@ -103,6 +108,7 @@ import { useRoute, useRouter } from 'vue-router'
 import { dataFilter, getData, handleTime, getNearInfo } from '../composables/modules.js'
 import { sloganLib, cityLib, modeLib } from '../composables/data.js'
 import Recommend from '../components/Recommend.vue'
+import Error from './../components/Error'
 
 export default {
   name: 'Search',
@@ -111,6 +117,7 @@ export default {
     setMode: Function,
   },
   components: {
+    Error,
   },
   setup(props) {
     const route = useRoute();
@@ -118,6 +125,7 @@ export default {
     const result = ref([]);
     const loadBtn = ref(true);
     const params = route.params;
+    const loading = ref(0);
     let pageIdx = 1;
     console.log(params.value);
     //const mode = params.mode;
@@ -156,7 +164,11 @@ export default {
           result.value.push(...data);
           pageIdx += 1;
           console.log(result.value);
-        }).catch((err) => console.log(err));
+          loading.value = 1;
+        }).catch((err) => {
+          console.log(err);
+          loading.value = -1;
+        });
       
     }
     const getTitle = () => {
@@ -175,7 +187,7 @@ export default {
       return city? `/${mode}/${city}/${keyword || ''}`
       : `/${mode}/${params.lat}/${params.lon}`
     }
-    return { result, getUrl, getTitle, loadBtn, loadData, getLink }
+    return { result, getUrl, getTitle, loadBtn, loadData, getLink, loading }
   }
 }
 </script>

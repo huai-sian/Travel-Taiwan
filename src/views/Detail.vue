@@ -64,26 +64,26 @@
       </p>
       <p v-if="result.Class || result.Class1 || result.Class2 || result.Class3">
         <span v-text="`${getMode(route.params.id, false)}標籤：`"></span>
-        <!-- <router-link 
-          class="detail-tag"
+        <span
+          class="detail-tag bdrs-sm"
+          v-text="result.Class"
           v-if="result.Class"
-          v-text="result.Class">
-        </router-link>
-        <router-link 
-          class="detail-tag"
+        ></span>
+        <span
+          class="detail-tag bdrs-sm"
+          v-text="result.Class1"
           v-if="result.Class1"
-          v-text="result.Class1">
-        </router-link>
-        <router-link 
-          class="detail-tag"
+        ></span>
+        <span
+          class="detail-tag bdrs-sm"
+          v-text="result.Class2"
           v-if="result.Class2"
-          v-text="result.Class2">
-        </router-link>
-        <router-link 
-          class="detail-tag"
+        ></span>
+        <span
+          class="detail-tag bdrs-sm"
+          v-text="result.Class3"
           v-if="result.Class3"
-          v-text="result.Class3">
-        </router-link> -->
+        ></span>
       </p>
 
     </div>
@@ -233,6 +233,8 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import "./../assets/scss/components/_variables.scss";
+
   .detail {
     padding: 2rem;
     p {
@@ -260,7 +262,20 @@ export default {
     }
     &-more {
       text-decoration: none;
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+    &-tag {
+      margin: 0 0.3rem;
+      padding: 0.2rem 0.5rem 0.3rem;
+      line-height: 3rem;
       color: black;
+      background-color: $c_main;
+      white-space: nowrap;
+      text-decoration: none;
+      transition: color 0.5s;
+      border-radius: .5rem;
     }
   }
   .banner {
