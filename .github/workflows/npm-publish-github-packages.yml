@@ -27,3 +27,10 @@ jobs:
           ACCESS_TOKEN: ${{ secrets.COMMIT_SECRET }} # Settings > Secret 建立的 ACCESS_TOKEN，推同個 repo 的話可以不需要
           BRANCH: gh-pages # deploy 到 gh-pages 這個分支
           FOLDER: dist # build 後的資料夾
+      - name: Cypress run
+        uses: cypress-io/github-action@v6
+        with:
+          wait-on-timeout: 120
+          config-file: cypress.config.js
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
