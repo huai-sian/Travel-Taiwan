@@ -7,7 +7,7 @@ on:
   push:
     branches: [ "main" ]
 env:
-  PERFORMANCE_TEST: cypress
+  VUE_APP_PERFORMANCE_TEST: cypress
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
