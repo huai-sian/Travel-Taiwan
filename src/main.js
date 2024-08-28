@@ -30,4 +30,6 @@ if (process.env["PERFORMANCE_TEST"] === "cypress") {
   Sentry.setTag("test", "performance-test");
 }
 
+console.log(process.env["PERFORMANCE_TEST"]);
+
 app.use(router).mount("#app");
