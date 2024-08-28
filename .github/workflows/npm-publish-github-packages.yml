@@ -6,7 +6,8 @@ name: deploy
 on:
   push:
     branches: [ "main" ]
-
+env:
+  PERFORMANCE_TEST: cypress
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
