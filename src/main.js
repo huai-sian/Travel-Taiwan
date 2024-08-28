@@ -25,11 +25,11 @@ Sentry.init({
   replaysOnErrorSampleRate: 1.0, // If you're not already sampling the entire session, change the sample rate to 100% when sampling sessions where errors occur.
 });
 
-if (process.env["PERFORMANCE_TEST"] === "cypress") {
-  console.log(process.env["PERFORMANCE_TEST"]);
+if (process.env["VUE_APP_PERFORMANCE_TEST"] === "cypress") {
+  console.log(process.env["VUE_APP_PERFORMANCE_TEST"]);
   Sentry.setTag("test", "performance-test");
 }
 
-console.log(process.env["PERFORMANCE_TEST"]);
+console.log("VUE_APP_PERFORMANCE_TEST", process.env.VUE_APP_PERFORMANCE_TEST);
 
 app.use(router).mount("#app");
